@@ -1,7 +1,8 @@
 import type { AppProps } from "next/app";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
 import "../styles/globals.css";
-import { chain } from "../const/contractaddresses";
+import { chain } from "../const/consts";
+import  { SessionProvider } from "next-auth/react";
 
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
@@ -10,8 +11,10 @@ const activeChain = chain;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThirdwebProvider activeChain={activeChain}>
+    <ThirdwebProvider activeChain={activeChain} authConfig={{authUrl:'/api/auth' , domain:'localhost:3000'}} >
+      <SessionProvider session={pageProps.session}>
       <Component {...pageProps} />
+      </SessionProvider>  
     </ThirdwebProvider>
   );
 }

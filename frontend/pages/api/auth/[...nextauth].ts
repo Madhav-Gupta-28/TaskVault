@@ -1,5 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
+require("dotenv").config();
 
 export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
